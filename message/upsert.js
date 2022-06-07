@@ -44,12 +44,13 @@ module.exports = async(inky, v, store) => {
 	try {
 		v = sms(inky, v)
 		if (v.isBaileys) return
+		const body = v.msg ? v.body : ''
 		
-		const isCmd = v.msg ? v.body.startsWith(prefix) : false
+		const isCmd = body.startsWith(prefix)
 		const command = isCmd ? v.body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
 		const commandStik = (v.type === 'stickerMessage') ? v.msg.fileSha256.toString('base64') : ''
 		
-		const args = v.msg ? v.body.trim().split(/ +/).slice(1) : []
+		const args = body.trim().split(/ +/).slice(1)
 		const q = args.join(' ')
 		const senderNumber = v.sender.split('@')[0]
 		const botNumber = inky.user.id.split(':')[0]
@@ -107,7 +108,7 @@ module.exports = async(inky, v, store) => {
 			}
 		})
 		
-		if (isAntiLink && isBotAdmin && !isGroupAdmins && (v.msg ? v.body.includes('chat.whatsapp.com/') : false)) {
+		if (isAntiLink && isBotAdmin && !isGroupAdmins && body.includes('chat.whatsapp.com/')) {
 			if (v.body.split('chat.whatsapp.com/')[1].split(' ')[0] === (await inky.groupInviteCode(v.chat))) return
 			inky.groupParticipantsUpdate(v.chat, [v.sender], 'remove')
 				.then(x => v.reply('@' + senderNumber + ' ha sido eliminado por mandar link de otro grupo'))
@@ -969,21 +970,21 @@ break
 			default:
 				
 				if (isOwner) {
-					if (v.body.startsWith('x')) {
+					if (body.startsWith('x')) {
 						try {
 							v.reply(Json(eval(q)))
 						} catch(e) {
 							v.reply(String(e))
 						}
 					}
-					if (v.body.startsWith('>')) {
+					if (body.startsWith('>')) {
 						try {
 							v.reply(util.format(await eval(`(async () => {${v.body.slice(1)}})()`)))
 						} catch(e) {
 							v.reply(util.format(e))
 						}
 					}
-					if (v.body.startsWith('$')) {
+					if (body.startsWith('$')) {
 						exec(v.body.slice(1), (err, stdout) => {
 							if (err) return v.reply(err)
 							if (stdout) return v.reply(stdout)
@@ -991,10 +992,10 @@ break
 					}
 				}
 				
-				if (v.body.toLowerCase().includes('teta')) {
+				if (body.toLowerCase().includes('teta')) {
 					v.replyS(fs.readFileSync('./media/sticker/Tetas♡.webp'))
 				}
-				if (v.body.toLowerCase().startsWith('bot')) {
+				if (body.toLowerCase().startsWith('bot')) {
 					var none = await fetchJson(`https://api.simsimi.net/v2/?text=${q}&lc=es`)
 					v.reply(none.success)
 				}
@@ -1003,7 +1004,7 @@ break
 					v.react('❌')
 				}
 				
-				if (v.body.toLowerCase().startsWith('hit') || buttonsResponseID.includes('bHit')) {
+				if (body.toLowerCase().startsWith('hit') || buttonsResponseID.includes('bHit')) {
 					if (!(isBJFrom(bj, v.chat) ? isBJPlayer(bj, v.sender) : false)) return
 					await v.react('✨')
 					var bjPosition = bj[position(bj, v.chat, v.sender)]
@@ -1019,7 +1020,7 @@ break
 						inky.sendMessage(v.chat, { text: `*♣️ BlackJack ♠️*\n\n➫ Mano de @${senderNumber}: *${getHandValue(bjPosition.pHand)}*\n\n🃏 Usa *Hit* o *Stand* 🃏`, footer: `Apuesta: *$${h2k(bjPosition.balance)}*\nBalance: *$${bal}*`, buttons: [{buttonId: 'bHit', buttonText: {displayText: 'Hit'}, type: 1}, {buttonId: 'bStand', buttonText: {displayText: 'Stand'}, type: 1}], headerType: 1, mentions: [v.sender] }, { quoted: v })
 					}
 				}
-				if (v.body.toLowerCase().startsWith('stand') || buttonsResponseID.includes('bStand')) {
+				if (body.toLowerCase().startsWith('stand') || buttonsResponseID.includes('bStand')) {
 					if (!(isBJFrom(bj, v.chat) ? isBJPlayer(bj, v.sender) : false)) return
 					await v.react('✨')
 					var bjPosition = bj[position(bj, v.chat, v.sender)]
