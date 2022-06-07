@@ -45,7 +45,7 @@ module.exports = async(inky, v, store) => {
 		v = sms(inky, v)
 		if (v.isBaileys) return
 		
-		const isCmd = v.msg ? v.body.startsWith(prefix) ? false
+		const isCmd = v.msg ? v.body.startsWith(prefix) : false
 		const command = isCmd ? v.body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
 		const commandStik = (v.type === 'stickerMessage') ? v.msg.fileSha256.toString('base64') : ''
 		
