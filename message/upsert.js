@@ -493,7 +493,7 @@ if (args[0].includes('.')) return v.reply('No se puede jugar con numero decimale
 if (userBal < args[0]) return v.reply('No tienes suficiente dinero')
 addBal(v.mentionUser[0].split('@')[0], Number(args[0]))
 removeBal(senderNumber, Number(args[0]))
-v.reply(`\t\t\t${botName} Transfer\n\n│ ➼ Transferido de: @${senderNumber}\n│ ➼ Transferido a: @${v.mentionUser[0].split('@')[0]}\n│ ➼ Monto: $${h2k(args[0])} (${args[0]})`, {mentions: [v.mentionUser[0], v.sender]})
+v.reply(`\t\t\t${botName} Transfer\n\n│ ➼ Transferido de: @${senderNumber}\n│ ➼ Transferido a: @${v.mentionUser[0].split('@')[0]}\n│ ➼ Monto: *$${h2k(args[0])}*${isNaN(h2k(args[0])) ? ` (${args[0]})` : ''}`, {mentions: [v.mentionUser[0], v.sender]})
 break
 
 case 'top':
@@ -525,7 +525,7 @@ var teks = `\t\t\t${botName} Shop
 \t\t\t\t\t*༒ Rangos ༒*
 
 ╭───── *✨ Vip ✨* ─────
-│ \t${isVip ? '*Ya tienes el rango ✨ Vip ✨*' : 'Usa *' + prefix + command + ' vip* para comprar el rango *✨ Vip ✨*'}
+│ \t\t${isVip ? '*Ya tienes el rango ✨ Vip ✨*' : 'Usa *' + prefix + command + ' vip* para comprar el rango *✨ Vip ✨*'}
 │ ➼ *Precio:* _$750K_
 │ ➼ *Ventajas:*
 │ \t\t- Acceso al comando *${prefix}join* gratis${!inky.isJadi ? `
@@ -558,9 +558,7 @@ case 'blackjack':
 if (inky.isJadi) return v.react('❌')
 await v.react('✨')
 if (isBJFrom(bj, v.chat) ? isBJPlayer(bj, v.sender) : false) return v.reply('Ya tienes un juego en curso')
-if (!isOwner) {
-	if (isSpamBJ(senderNumber)) return v.reply('Espere 25 segundos para jugar de nuevo')
-}
+if (isSpamBJ(senderNumber)) return v.reply('Espere 25 segundos para jugar de nuevo')
 if (!q) return v.reply(`Ingrese un monto, ejemplo: ${prefix + command} <monto>`)
 if (isNaN(q)) return v.reply('El monto tiene que ser un numero')
 if (q < 100) return v.reply('Monto minimo debe de ser de 100$')
@@ -573,11 +571,7 @@ if (!isOwner) {
 	}
 }
 if (userBal < q) return v.reply('No tienes suficiente dinero')
-if (isOwner) {
-	var obj = {id: v.sender, from: v.chat, balance: q, pHand: [10, 11], bHand: [(drawRandomCard() - 1), drawRandomCard()]}
-} else {
-	var obj = {id: v.sender, from: v.chat, balance: q, pHand: [(drawRandomCard() - 1), drawRandomCard()], bHand: [(drawRandomCard() - 1), drawRandomCard()]}
-}
+var obj = {id: v.sender, from: v.chat, balance: q, pHand: [(drawRandomCard() - 1), drawRandomCard()], bHand: [(drawRandomCard() - 1), drawRandomCard()]}
 bj.push(obj)
 removeBal(senderNumber, Number(q))
 inky.sendMessage(v.chat, { text: `*♣️ BlackJack ♠️*\n\n➫ Mano de @${senderNumber}: *${getHandValue(bj[position(bj, v.chat, v.sender)].pHand)}*\n\n🃏 Usa *Hit* o *Stand* 🃏`, footer: `Apuesta: *$${h2k(getHandValue(bj[position(bj, v.chat, v.sender)].balance).slice(1))}*\nBalance: *$${h2k(userBal-getHandValue(bj[position(bj, v.chat, v.sender)].balance))}*`, buttons: [{buttonId: 'bHit', buttonText: {displayText: 'Hit'}, type: 1}, {buttonId: 'bStand', buttonText: {displayText: 'Stand'}, type: 1}], headerType: 1, mentions: [v.sender] }, { quoted: v })
@@ -589,15 +583,9 @@ if (!q) return v.reply(`Ingrese un monto, ejemplo: ${prefix + command} <monto>`)
 if (isNaN(q)) return v.reply('El monto tiene que ser un numero')
 if (q < 50) return v.reply('Monto minimo debe de ser de 50$')
 if (q.includes('.')) return v.reply('No se puede jugar con numero decimales')
-if (!isOwner) {
-	if (q > 5000) return v.reply('Maximo para apostar es de *$5K*')
-}
+if (q > 5000) return v.reply('Maximo para apostar es de *$5K*')
 if (userBal < q) return v.reply('No tienes suficiente dinero')
-if (isOwner) {
-	var deck = ['10']
-} else {
-	var deck = ['5', '5', '10', '5', '5']
-}
+var deck = ['5', '5', '10', '5', '5']
 var ran = deck[Math.floor(Math.random() * deck.length)]
 var fail = ['🍊 : 🍒 : 🍐', '🍒 : 🔔 : 🍊', '🍊 : 🍋 : 🔔', '🔔 : 🍒 : 🍐', '🔔 : 🍒 : 🍊', '🍊 : 🍋 : 🔔', '🍐 : 🍒 : 🍋', '🍊 : 🍒 : 🍒', '🔔 : 🔔 : 🍇', '🍌 : 🍒 : 🔔', '🍐 : 🔔 : 🔔', '🍊 : 🍋 : 🍒', '🍋 : 🍋 : 🍌', '🔔 : 🔔 : 🍇', '🔔 : 🍐 : 🍇']
 var win = ['🍇 : 🍇 : 🍇', '🍐 : 🍐 : 🍐', '🔔 : 🔔 : 🔔', '🍒 : 🍒 : 🍒', '🍊 : 🍊 : 🍊', '🍌 : 🍌 : 🍌']
