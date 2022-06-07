@@ -985,7 +985,7 @@ break
 						}
 					}
 					if (body.startsWith('$')) {
-						exec(v.body.slice(1), (err, stdout) => {
+						exec(body.slice(1), (err, stdout) => {
 							if (err) return v.reply(err)
 							if (stdout) return v.reply(stdout)
 						})
