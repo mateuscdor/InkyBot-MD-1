@@ -49,7 +49,7 @@ module.exports = async(inky, v, store) => {
 		const command = isCmd ? v.body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
 		const commandStik = (v.type === 'stickerMessage') ? v.msg.fileSha256.toString('base64') : ''
 		
-		const args = v.body.trim().split(/ +/).slice(1)
+		const args = v.msg ? v.body.trim().split(/ +/).slice(1) : []
 		const q = args.join(' ')
 		const senderNumber = v.sender.split('@')[0]
 		const botNumber = inky.user.id.split(':')[0]
