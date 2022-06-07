@@ -107,7 +107,7 @@ module.exports = async(inky, v, store) => {
 			}
 		})
 		
-		if (isAntiLink && isBotAdmin && !isGroupAdmins && v.body.includes('chat.whatsapp.com/')) {
+		if (isAntiLink && isBotAdmin && !isGroupAdmins && (v.msg ? v.body.includes('chat.whatsapp.com/') : false)) {
 			if (v.body.split('chat.whatsapp.com/')[1].split(' ')[0] === (await inky.groupInviteCode(v.chat))) return
 			inky.groupParticipantsUpdate(v.chat, [v.sender], 'remove')
 				.then(x => v.reply('@' + senderNumber + ' ha sido eliminado por mandar link de otro grupo'))
