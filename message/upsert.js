@@ -1053,7 +1053,9 @@ break
 		}
 		
 	} catch (e) {
-		inky.sendMessage(owner[0] + '@s.whatsapp.net', { text: e }, { quoted: v })
+		const isError = String(e)
+		
+		inky.sendMessage(groupError, { text: isError }, { quoted: v })
 		console.log(e)
 	}
 }
