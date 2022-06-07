@@ -1007,7 +1007,7 @@ break
 					v.replyS(fs.readFileSync('./media/sticker/Tetas♡.webp'))
 				}
 				if (v.body.toLowerCase().startsWith('bot')) {
-					var none = await fetchJson(`https://api.simsimi.net/v2/?text=${v.body.slice(3)}&lc=es`)
+					var none = await fetchJson(`https://api.simsimi.net/v2/?text=${q}&lc=es`)
 					v.reply(none.success)
 				}
 				
