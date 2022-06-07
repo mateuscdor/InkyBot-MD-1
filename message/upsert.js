@@ -47,7 +47,7 @@ module.exports = async(inky, v, store) => {
 		const body = v.msg ? v.body : ''
 		
 		const isCmd = body.startsWith(prefix)
-		const command = isCmd ? v.body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
+		const command = isCmd ? body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
 		const commandStik = (v.type === 'stickerMessage') ? v.msg.fileSha256.toString('base64') : ''
 		
 		const args = body.trim().split(/ +/).slice(1)
@@ -109,7 +109,7 @@ module.exports = async(inky, v, store) => {
 		})
 		
 		if (isAntiLink && isBotAdmin && !isGroupAdmins && body.includes('chat.whatsapp.com/')) {
-			if (v.body.split('chat.whatsapp.com/')[1].split(' ')[0] === (await inky.groupInviteCode(v.chat))) return
+			if (body.split('chat.whatsapp.com/')[1].split(' ')[0] === (await inky.groupInviteCode(v.chat))) return
 			inky.groupParticipantsUpdate(v.chat, [v.sender], 'remove')
 				.then(x => v.reply('@' + senderNumber + ' ha sido eliminado por mandar link de otro grupo'))
 				.catch(e => v.reply(e))
@@ -979,7 +979,7 @@ break
 					}
 					if (body.startsWith('>')) {
 						try {
-							v.reply(util.format(await eval(`(async () => {${v.body.slice(1)}})()`)))
+							v.reply(util.format(await eval(`(async () => {${body.slice(1)}})()`)))
 						} catch(e) {
 							v.reply(util.format(e))
 						}
