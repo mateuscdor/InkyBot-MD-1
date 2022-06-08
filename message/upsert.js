@@ -100,7 +100,7 @@ module.exports = async(inky, v, store) => {
 			},
 			message: {
 				imageMessage: {
-					jpegThumbnail: fs.readFileSync('./media/image/menu.jpg'),
+					jpegThumbnail: fs.readFileSync('./media/image/reply.jpg'),
 					caption: fake
 				}
 			}
@@ -796,7 +796,7 @@ for (let id of groupsID) {
 	var groupMdata = await inky.groupMetadata(id)
 	var groupMem = groupMdata.participants
 	groupMem.map(x => jids.push(x.id))
-	v.reply(`\t\t\t\t*${botName} BroadCast*\n\n${q}`, {id: id, mentions: jids})
+	v.reply(`\t\t\t\t*${botName} BroadCast*\n\n${q}`, {id: id, mentions: jids, quoted: quotedStatus})
 }
 break
 
