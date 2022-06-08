@@ -5,6 +5,7 @@ global.groupSupport = 'https://chat.whatsapp.com/L5KgudBpBA21mA9ude4cVG'
 global.groupError = '120363043224848613@g.us'
 
 global.staff = [
+	'595994422882', // Salomón
 	'595993265466' // YameteKudasai
 ]
 global.owner = [
