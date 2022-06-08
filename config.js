@@ -6,6 +6,7 @@ global.groupError = '120363043224848613@g.us'
 
 global.staff = [
 	'595994422882', // Salomón
+	'595976905967', // Cherli
 	'595993265466' // YameteKudasai
 ]
 global.owner = [
