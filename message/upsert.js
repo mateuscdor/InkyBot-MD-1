@@ -713,22 +713,21 @@ case 'play':
 await v.react('✨')
 if (!q) return v.reply('Use *' + prefix + command + ' <texto>*')
 var play = await yts(q)
-v.reply(Json(play.videos[0]))
-/*
+await v.reply(Json(play.videos[0]))
+var vid = play.videos[0]
 var teks = `\t\t\t► ${botName} Youtube
 
-ღ *Titulo:* ${play.title}
-ღ *Duracion:* ${play.timestamp}
-ღ *Visitas:* ${h2k(play.views)}
-ღ *Author:* ${play.author.name}`
+ღ *Titulo:* ${vid.title}
+ღ *Duracion:* ${vid.timestamp}
+ღ *Visitas:* ${h2k(vid.views)}
+ღ *Author:* ${vid.author.name}`
 var buttons = [
-	{urlButton: {displayText: '🔗 Link del Video 🔗', url: play.url}},
-	{quickReplyButton: {displayText: '🎵 Audio 🎵', id: prefix + 'ytmp3 ' + play.url}},
-	{quickReplyButton: {displayText: '🎬 Video 🎬', id: prefix + 'ytmp4 ' + play.url}}
+	{urlButton: {displayText: '🔗 Link del Video 🔗', url: vid.url}},
+	{quickReplyButton: {displayText: '🎵 Audio 🎵', id: prefix + 'ytmp3 ' + vid.url}},
+	{quickReplyButton: {displayText: '🎬 Video 🎬', id: prefix + 'ytmp4 ' + vid.url}}
 ]
 var buffer = await getBuffer(vid.image)
 replyTempImg(teks, fake, buttons, buffer)
-*/
 break
 
 case 'tiktok':
