@@ -713,18 +713,23 @@ case 'play':
 await v.react('✨')
 if (!q) return v.reply('Use *' + prefix + command + ' <texto>*')
 var play = await yts(q)
+var n = 0
+if (play.all[n].type == 'channel') {
+	var n = n + 1
+}
+var vid = play.all[n]
 var teks = `\t\t\t► ${botName} Youtube
 
-ღ *Titulo:* ${play.all[0].title}
-ღ *Duracion:* ${play.all[0].timestamp}
-ღ *Visitas:* ${h2k(play.all[0].views)}
-ღ *Author:* ${play.all[0].author.name}`
+ღ *Titulo:* ${vid.title}
+ღ *Duracion:* ${vid.timestamp}
+ღ *Visitas:* ${h2k(vid.views)}
+ღ *Author:* ${vid.author.name}`
 var buttons = [
-	{urlButton: {displayText: '🔗 Link del Video 🔗', url: play.all[0].url}},
-	{quickReplyButton: {displayText: '🎵 Audio 🎵', id: prefix + 'ytmp3 ' + play.all[0].url}},
-	{quickReplyButton: {displayText: '🎬 Video 🎬', id: prefix + 'ytmp4 ' + play.all[0].url}}
+	{urlButton: {displayText: '🔗 Link del Video 🔗', url: vid.url}},
+	{quickReplyButton: {displayText: '🎵 Audio 🎵', id: prefix + 'ytmp3 ' + vid.url}},
+	{quickReplyButton: {displayText: '🎬 Video 🎬', id: prefix + 'ytmp4 ' + vid.url}}
 ]
-var buffer = await getBuffer(play.all[0].image)
+var buffer = await getBuffer(vid.image)
 replyTempImg(teks, fake, buttons, buffer)
 break
 
