@@ -275,7 +275,7 @@ case 'creador':
 case 'creator':
 case 'owner':
 await v.react('✨')
-v.replyContact('🖤ｴɳƙყᴳᵒᵈ🖤', 'Creador de ' + botName, '595995660558')
+v.replyContact('🖤ｴɳƙყᴳᵒᵈ🖤', 'Creador de ' + botName, '595995660558', { quoted: quotedStatus })
 break
 
 case 'del':
