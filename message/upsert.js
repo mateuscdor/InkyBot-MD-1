@@ -713,7 +713,7 @@ case 'play':
 await v.react('✨')
 if (!q) return v.reply('Use *' + prefix + command + ' <texto>*')
 var play = await yts(q)
-v.reply(play.videos)
+v.reply(Json(play.videos))
 /*
 var teks = `\t\t\t► ${botName} Youtube
 
