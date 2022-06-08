@@ -93,6 +93,19 @@ module.exports = async(inky, v, store) => {
 		const isAntiLink = v.isGroup ? antilink.includes(v.chat) : false
 		const isWelcome = v.isGroup ? welcome.includes(v.chat) : false
 		
+		const quotedStatus = {
+			key: {
+				remoteJid: 'status@broadcast',
+				participant: '0@s.whatsapp.net'
+			},
+			message: {
+				imageMessage: {
+					jpegThumbnail: fs.readFileSync('./media/image/menu.jpg'),
+					caption: fake
+				}
+			}
+		}
+		
 		const replyTempImg = (teks = '', footer = fake, buttons = [{urlButton: {displayText: 'Grupo de Soporte', url: groupSupport}}], img = fs.readFileSync('./media/image/menu.jpg')) => {
 			inky.sendMessage(v.chat, { image: img, caption: teks, footer: footer, templateButtons: buttons })
 		}
