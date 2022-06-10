@@ -17,7 +17,8 @@ const yts = require('yt-search')
 	Js
 */
 
-const bj = []
+const bj = new Array()
+const giveaway = new Array()
 
 const { imageToWebp, videoToWebp, writeExif } = require('../lib/exif')
 const { fetchJson, getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('../lib/functions')
@@ -169,8 +170,9 @@ break
 */
 
 case 'giveaway':
-var jids = []
-groupMembers.map(x => jids.push(x.id))
+if (!v.isGroup) return v.reply(mess.only.group)
+if (!isGroupAdmins) return v.reply(mess.only.admins)
+if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\t\t➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 var listMessage = {
 	text: 'a',
 	buttonText: 'Abrir Aqui',
@@ -178,11 +180,11 @@ var listMessage = {
 		{
 			title: 'Seccion 1',
 			rows: [
-				{title: 'asd', rowId: 'asd'}
+				{title: 'Ingresar en el sorteo', rowId: 'asd'}
 			]
 		}
 	],
-	mentions: jids
+	mentions: groupMembers.map(x => x.id)
 }
 await inky.sendMessage(v.chat, listMessage)
 break
@@ -345,6 +347,7 @@ break
 case 'antilink':
 await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
+if (!isGroupAdmins) return v.reply(mess.only.admins)
 if (!q) return v.reply(`Use *${prefix + command} 1* para activarlo o *${prefix + command} 0* para desactivarlo`)
 if (Number(q) === 1) {
 	if (isAntiLink) return v.reply('El antilink ya estaba activo')
@@ -365,6 +368,7 @@ case 'welcome':
 if (inky.isJadi) return v.react('❌')
 await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
+if (!isGroupAdmins) return v.reply(mess.only.admins)
 if (!q) return v.reply(`Use *${prefix + command} 1* para activarlo o *${prefix + command} 0* para desactivarlo`)
 if (Number(q) === 1) {
 	if (isWelcome) return v.reply('El mensaje de bienvenida ya estaba activo')
