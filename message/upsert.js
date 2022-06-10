@@ -201,6 +201,7 @@ addGiveaways(giveaway, v.chat, senderNumber, reward)
 if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if (t == 'h') { var m = (1000 * 60) * 60 } else if (t == 'd') { var m = ((1000 * 60) * 60) * 24 }
 await sleep(tm * m)
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward).participants
+if (p.length == '0') return v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id)})
 var none = Math.floor(Math.random() * p.length + 0)
 var user = p[none]
 v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *"' + reward + '"*', {mentions: groupMembers.map(x => x.id)})
