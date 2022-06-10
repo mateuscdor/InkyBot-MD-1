@@ -17,9 +17,6 @@ const yts = require('yt-search')
 	Js
 */
 
-const bj = new Array()
-const giveaway = new Array()
-
 const { imageToWebp, videoToWebp, writeExif } = require('../lib/exif')
 const { fetchJson, getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('../lib/functions')
 const { addFilter, addUser, addBal, checkBal, checkBalReg, isFiltered, removeBal } = require('../lib/money')
@@ -150,6 +147,9 @@ module.exports = async(inky, v, store) => {
 				await fs.unlinkSync(nameMp4 + '.mp4')
 			}
 		}
+		
+		const bj = new Array()
+		const giveaway = new Array()
 		
 		switch (commandStik) {
 
