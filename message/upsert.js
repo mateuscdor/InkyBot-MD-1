@@ -195,6 +195,14 @@ await inky.sendMessage(v.chat, listMessage)
 addGiveaways(giveaway, v.chat, senderNumber, reward)
 break
 
+case 'giveawayadd':
+if (!isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1])) return
+var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
+if (p.includes(senderNumber)) return v.reply('Usted ya esta participando en el sorteo')
+p.push(senderNumber)
+v.reply('Ya estas participando en el sorteo de @' + args[0], {mentions: [v.sender, args[0] + '@s.whatsapp.net']})
+break
+
 /*
 	End Test
 */
