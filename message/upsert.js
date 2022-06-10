@@ -177,6 +177,7 @@ var time = args[0]
 var reward = q.split(args[0] + ' ')[1]
 if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
+if (isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)) return v.reply('Ya hay un sorteo con ese premio')
 var listMessage = {
 	text: `Duracion: ${time}\n\nReward: ${reward}\n\nHosteado por: @${senderNumber}`,
 	buttonText: 'Abrir Aqui',
@@ -191,6 +192,7 @@ var listMessage = {
 	mentions: groupMembers.map(x => x.id)
 }
 await inky.sendMessage(v.chat, listMessage)
+addGiveaways(giveaway, v.chat, senderNumber, reward)
 break
 
 /*
