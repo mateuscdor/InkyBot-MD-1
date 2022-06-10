@@ -204,7 +204,7 @@ var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward
 var none = Math.floor(Math.random() * p.length + 0)
 var user = p[none]
 v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *"' + reward + '"*', {mentions: groupMembers.map(x => x.id)})
-giveaway.splice(giveaway.indexOf(isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)), 1)
+isGiveaway(giveaway, v.chat).giveaways.splice(isGiveaway(giveaway, v.chat).giveaways.indexOf(isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)), 1)
 if (isGiveaway(giveaway, v.chat).giveaways.length == '0') {
 	giveaway.splice(giveaway.indexOf(isGiveaway(giveaway, v.chat)), 1)
 }
