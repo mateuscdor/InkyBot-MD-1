@@ -196,7 +196,7 @@ var listMessage = {
 	],
 	mentions: groupMembers.map(x => x.id)
 }
-await inky.sendMessage(v.chat, listMessage)
+var msg = await inky.sendMessage(v.chat, listMessage)
 addGiveaways(giveaway, v.chat, senderNumber, reward)
 if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if (t == 'h') { var m = (1000 * 60) * 60 } else if (t == 'd') { var m = ((1000 * 60) * 60) * 24 }
 await sleep(tm * m)
@@ -209,6 +209,7 @@ isGiveaway(giveaway, v.chat).giveaways.splice(isGiveaway(giveaway, v.chat).givea
 if (isGiveaway(giveaway, v.chat).giveaways.length == '0') {
 	giveaway.splice(giveaway.indexOf(isGiveaway(giveaway, v.chat)), 1)
 }
+await v.reply(msg)
 break
 
 case 'giveawayadd':
