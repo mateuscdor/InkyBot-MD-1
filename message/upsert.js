@@ -175,9 +175,10 @@ if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
 var time = args[0]
 var reward = q.split(args[0] + 'v')[1]
-if (!q || (!time && !reward)) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
+if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
+if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 var listMessage = {
-	text: 'a',
+	text: 'Duracion: ${time}\n\nReward: ${reward}\n\nHosteado por: @${senderNumber}',
 	buttonText: 'Abrir Aqui',
 	sections: [
 		{
@@ -186,7 +187,8 @@ var listMessage = {
 				{title: 'Ingresar en el sorteo', rowId: '-giveawayadd ' + senderNumber + ' ' + reward}
 			]
 		}
-	]//, mentions: groupMembers.map(x => x.id)
+	],
+	mentions: groupMembers.map(x => x.id)
 }
 await inky.sendMessage(v.chat, listMessage)
 break
