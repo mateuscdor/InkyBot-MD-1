@@ -205,12 +205,12 @@ var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward
 if (p.length == '0') return v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id)})
 var none = Math.floor(Math.random() * p.length + 0)
 var user = p[none]
-v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *"' + reward + '"*', {mentions: groupMembers.map(x => x.id)})
+await v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *"' + reward + '"*', {mentions: groupMembers.map(x => x.id)})
 isGiveaway(giveaway, v.chat).giveaways.splice(isGiveaway(giveaway, v.chat).giveaways.indexOf(isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)), 1)
 if (isGiveaway(giveaway, v.chat).giveaways.length == '0') {
 	giveaway.splice(giveaway.indexOf(isGiveaway(giveaway, v.chat)), 1)
 }
-await v.reply(msg)
+await inky.sendMessage(v.chat, { delete: msg.key })
 break
 
 case 'giveawayadd':
