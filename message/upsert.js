@@ -691,9 +691,9 @@ v.reply(mess.wait)
 var nameMp4 = getRandom('')
 var nameMp3 = getRandom('.mp3')
 await v.quoted.download(nameMp4)
-exec(`ffmpeg -i ${nameMp4}.mp4 ${nameMp3}`, async(err) => {
-	fs.unlinkSync(nameMp4)
-	if (err) return v.reply(String(err))
+exec(`ffmpeg -i ${nameMp4}.mp4 ${nameMp3}`, async(e) => {
+	fs.unlinkSync(nameMp4 + '.mp4')
+	if (e) return v.reply(String(e))
 	await v.replyAud(fs.readFileSync(nameMp3))
 	fs.unlinkSync(nameMp3)
 })
