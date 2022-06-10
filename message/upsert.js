@@ -178,7 +178,7 @@ var reward = q.split(args[0] + ' ')[1]
 if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 var listMessage = {
-	text: 'Duracion: ${time}\n\nReward: ${reward}\n\nHosteado por: @${senderNumber}',
+	text: `Duracion: ${time}\n\nReward: ${reward}\n\nHosteado por: @${senderNumber}`,
 	buttonText: 'Abrir Aqui',
 	sections: [
 		{
