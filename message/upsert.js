@@ -204,6 +204,10 @@ var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward
 var none = Math.floor(Math.random() * p.length + 0)
 var user = p[none]
 v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *"' + reward + '"*', {mentions: groupMembers.map(x => x.id)})
+giveaway.slice(giveaway.indexOf(isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)), 1)
+if (isGiveaway(giveaway, v.chat).giveaways.length == '0') {
+	giveaway.slice(giveaway.indexOf(isGiveaway(giveaway, v.chat)), 1)
+}
 break
 
 case 'giveawayadd':
