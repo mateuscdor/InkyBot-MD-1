@@ -171,6 +171,7 @@ break
 */
 
 case 'giveaway':
+await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
 var time = args[0]
@@ -196,7 +197,8 @@ addGiveaways(giveaway, v.chat, senderNumber, reward)
 break
 
 case 'giveawayadd':
-if (!isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1])) return
+if (!isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1])) return v.react('❌')
+await v.react('✨')
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
 if (p.includes(senderNumber)) return v.reply('Usted ya esta participando en el sorteo')
 p.push(senderNumber)
