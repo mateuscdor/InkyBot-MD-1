@@ -174,7 +174,7 @@ case 'giveaway':
 if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
 var time = args[0]
-var reward = q.split(args[0] + 'v')[1]
+var reward = q.split(args[0] + ' ')[1]
 if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 var listMessage = {
