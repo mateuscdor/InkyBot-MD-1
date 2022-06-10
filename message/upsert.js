@@ -694,7 +694,11 @@ await v.quoted.download(nameMp4)
 exec(`ffmpeg -i ${nameMp4}.mp4 ${nameMp3}`, async(e) => {
 	fs.unlinkSync(nameMp4 + '.mp4')
 	if (e) return v.reply(String(e))
-	await v.replyAud(fs.readFileSync(nameMp3))
+	if (q == '-ppt') {
+		await v.replyAud(fs.readFileSync(nameMp3), {ptt: true})
+	} else {
+		await v.replyAud(fs.readFileSync(nameMp3))
+	}
 	fs.unlinkSync(nameMp3)
 })
 break
