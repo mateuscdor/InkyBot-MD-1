@@ -26,7 +26,7 @@ const { addFilter, addUser, addBal, checkBal, checkBalReg, isFiltered, removeBal
 const { sms } = require('../lib/simple')
 
 const { addSetBJ, drawRandomCard, getHandValue, position, isBJFrom, isBJPlayer, isSpamBJ } = require('../lib/game/blackjack')
-const { isGiveaway } = require('../lib/game/giveaway')
+const { isGiveaway, isGiveaways } = require('../lib/game/giveaway')
 
 /*
 	Database
