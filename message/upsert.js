@@ -171,6 +171,7 @@ break
 */
 
 case 'giveaway':
+if (!isStaff) return v.react('❌')
 await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
