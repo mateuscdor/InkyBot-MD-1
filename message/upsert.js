@@ -172,7 +172,7 @@ break
 case 'giveaway':
 if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
-if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\t\t➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
+if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 var listMessage = {
 	text: 'a',
 	buttonText: 'Abrir Aqui',
