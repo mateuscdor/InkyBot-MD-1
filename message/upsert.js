@@ -421,6 +421,7 @@ break
 case 'antiviewonce':
 await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
+if (!isGroupAdmins) return v.reply(mess.only.admins)
 if (!q) return v.reply(`Use *${prefix + command} 1* para activarlo o *${prefix + command} 0* para desactivarlo`)
 if (Number(q) === 1) {
 	if (isAntiViewOnce) return v.reply('El antiviewonce ya estaba activo')
