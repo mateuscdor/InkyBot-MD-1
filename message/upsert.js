@@ -351,9 +351,9 @@ var none = () => {
 	inky.groupAcceptInvite(q.split('chat.whatsapp.com/')[1])
 		.then(x => {
 		v.reply('He ingresado exitosamente al grupo')
-		v.reply('He sido añadido al grupo por pedido de @' + senderNumber, x)
+		v.reply('He sido añadido al grupo por pedido de @' + senderNumber, {id: x, quoted: quotedStatus})
 	})
-		.catch(e => v.reply('No he podido ingresar al grupo, verifique que el enlace funcione'))
+		.catch(e => v.reply('No he podido ingresar al grupo, verifique que el enlace funcione, o no he podido ingresar por que me han eliminado el grupo.'))
 }
 if (isVip) {
 	if (!q) return v.reply('Ingrese el enlace del grupo')
