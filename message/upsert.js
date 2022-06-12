@@ -185,7 +185,7 @@ if (isNaN(tm)) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\
 if (!isNaN(t) && ((t != 's') || (t != 'm') || (t != 'h') || (t != 'd'))) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
 if (isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)) return v.reply('Ya hay un sorteo con ese premio')
 var listMessage = {
-	text: `\t\t\t\t➫ *${botName} Giveaway*\n\n│ ➼ *Hosteado por @${senderNumber}*\n│ ➼ *Sorteo de ${reward}*\n│ ➼ Duración: *${time}*`,
+	text: `\t\t\t\t➫ *${botName} Giveaway*\n\n│ ➼ *Hosteado por @${senderNumber}*\n│ ➼ *Sorteo de ${reward}*\n│ ➼ *Duración del sorteo ${time}*`,
 	buttonText: 'Abrir Aqui!',
 	sections: [
 		{
@@ -219,7 +219,7 @@ await v.react('✨')
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
 if (p.includes(senderNumber)) return v.reply('Usted ya esta participando en el sorteo')
 p.push(senderNumber)
-v.reply('Ya estas participando en el sorteo de @' + args[0], {mentions: [v.sender, args[0] + '@s.whatsapp.net']})
+v.reply('Ya estas participando en el sorteo de @' + args[0] + ' por *"' + q.split(args[0] + ' ')[1] + '"*', {mentions: [v.sender, args[0] + '@s.whatsapp.net']})
 break
 
 /*
