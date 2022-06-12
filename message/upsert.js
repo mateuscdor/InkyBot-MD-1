@@ -171,6 +171,7 @@ break
 */
 
 case 'giveaway':
+case 'sorteo':
 if (!isStaff) return v.react('❌')
 await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
