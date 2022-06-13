@@ -733,7 +733,7 @@ var nameWebp = getRandom('')
 await v.quoted.download(nameWebp)
 webpToMp4(nameWebp + '.webp')
 	.then(x => {
-	v.replyVid(x.result), fake, {gif: true})
+	v.replyVid(x.result, fake, {gif: true})
 	fs.unlinkSync(nameWebp + '.webp')
 })
 break
