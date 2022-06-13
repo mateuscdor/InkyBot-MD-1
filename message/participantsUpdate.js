@@ -9,7 +9,7 @@ module.exports = async(inky, v) => {
 		for (let num of participants) {
 			if (v.action == 'add') {
 				if (!JSON.parse(require('fs').readFileSync('./database/group/welcome.json')).includes(v.id)) return
-				var teks = `\t\t\t\t*Bienvenido @${num.split('@')[0]}*\n\n| ➼ *Grupo:* ${groupMetadata.subject}\n| ➼ *Descripcion:*\n${groupMetadata.desc ? groupMetadata.desc : 'Sin descripción'}`
+				var teks = `\t\t\t\t*Bienvenido @${num.split('@')[0]}*\n\n| ➼ *Grupo:* ${groupMetadata.subject}\n| ➼ *Descripcion:*\n\n${groupMetadata.desc ? groupMetadata.desc : '\t\t\t\t*Sin descripción*'}`
 				try {
 					ppimg = await inky.profilePictureUrl(num, 'image')
 				} catch {
