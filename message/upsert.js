@@ -20,7 +20,7 @@ const yts = require('yt-search')
 const bj = new Array()
 const giveaway = new Array()
 
-const { imageToWebp, videoToWebp, writeExif } = require('../lib/exif')
+const { imageToWebp, videoToWebp, webpToMp4, writeExif } = require('../lib/exif')
 const { fetchJson, getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('../lib/functions')
 const { addFilter, addUser, addBal, checkBal, checkBalReg, isFiltered, removeBal } = require('../lib/money')
 const { sms } = require('../lib/simple')
@@ -710,7 +710,8 @@ break
 
 case 'toimg':
 await v.react('✨')
-if (!isQuotedSticker) return v.reply('Responda a un sticker con el comando ' + prefix + command)
+if (!isQuotedSticker) return v.reply('Responda a un sticker estatico con el comando *' + prefix + command + '* o use *' + prefix + 'togif*')
+if (v.quoted.msg.isAnimated) return v.reply('Responda a un sticker estatico con el comando *' + prefix + command + '* o use *' + prefix + 'togif*')
 v.reply(mess.wait)
 var nameWebp = getRandom('')
 var nameJpg = getRandom('.jpg')
@@ -720,6 +721,20 @@ exec(`ffmpeg -i ${nameWebp}.webp ${nameJpg}`, async(err) => {
 	if (err) return v.reply(String(err))
 	await v.replyImg(fs.readFileSync(nameJpg))
 	fs.unlinkSync(nameJpg)
+})
+break
+
+case 'togif':
+await v.react('✨')
+if (!isQuotedSticker) return v.reply('Responda a un sticker animado con el comando *' + prefix + command + '* o use *' + prefix + 'toimg*')
+if (!v.quoted.msg.isAnimated) return v.reply('Responda a un sticker animado con el comando *' + prefix + command + '* o use *' + prefix + 'toimg*')
+v.reply(mess.wait)
+var nameWebp = getRandom('')
+await v.quoted.download(nameWebp)
+webpToMp4(nameWebp + '.webp')
+	.then(x => {
+	v.replyVid(x.result), fake, {gif: true})
+	fs.unlinkSync(nameWebp + '.webp')
 })
 break
 
