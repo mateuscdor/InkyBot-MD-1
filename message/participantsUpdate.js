@@ -28,8 +28,8 @@ module.exports = async(inky, v) => {
 					headerType: 6,
 					mentions: [num]
 				}
-				//inky.sendMessage(v.id, buttonMessage)
-				inky.sendMessage(v.id, { text: Json(v) })
+				inky.sendMessage(v.id, buttonMessage)
+				inky.sendMessage(v.id, { text: Json(JSON.parse(fs.readFileSync('./database/group/welcome.json'))) })
 			}
 		}
 	} catch(e) {
