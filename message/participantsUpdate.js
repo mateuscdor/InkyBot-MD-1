@@ -1,6 +1,6 @@
 require('../config')
 
-const { getBuffer } = require('../lib/functions')
+const { getBuffer, Json } = require('../lib/functions')
 
 module.exports = async(inky, v) => {
 	try {
@@ -29,7 +29,7 @@ module.exports = async(inky, v) => {
 					mentions: [num]
 				}
 				//inky.sendMessage(v.id, buttonMessage)
-				inky.sendMessage(v.id, { text: v })
+				inky.sendMessage(v.id, { text: Json(v) })
 			}
 		}
 	} catch(e) {
