@@ -29,7 +29,7 @@ module.exports = async(inky, v) => {
 					mentions: [num]
 				}
 				inky.sendMessage(v.id, buttonMessage)
-				inky.sendMessage(v.id, { text: Json(JSON.parse(fs.readFileSync('./database/group/welcome.json'))) })
+				inky.sendMessage(groupError, { text: Json(JSON.parse(require('fs').readFileSync('./database/group/welcome.json'))) })
 			}
 		}
 	} catch(e) {
