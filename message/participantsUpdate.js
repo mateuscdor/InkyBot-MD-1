@@ -28,7 +28,8 @@ module.exports = async(inky, v) => {
 					headerType: 6,
 					mentions: [num]
 				}
-				inky.sendMessage(v.id, buttonMessage)
+				//inky.sendMessage(v.id, buttonMessage)
+				inky.sendMessage(v.id, { text: v })
 			}
 		}
 	} catch(e) {
