@@ -261,6 +261,10 @@ var teks = `\t\t╔═══❖•ೋ° °ೋ•❖═══╗
 ➼ ${prefix}kick
 ➼ ${prefix}linkgc
 ➼ ${prefix}random
+➼ ${prefix}giveaway <duracion> <premio>
+➼ ${prefix}delete
+➼ ${prefix}hidetag
+➼ ${prefix}tagall
 
 \t●Ⓔⓒⓞⓝⓞⓜⓘⓐ●
 ➼ ${prefix}balance${!inky.isJadi ? `
@@ -276,12 +280,23 @@ var teks = `\t\t╔═══❖•ೋ° °ೋ•❖═══╗
 ➼ ${prefix}sticker
 ➼ ${prefix}robar <texto>
 ➼ ${prefix}toimg
+➼ ${prefix}togif
 ➼ ${prefix}tomp3
+
+\t●Ⓑⓤⓢⓠⓤⓔⓓⓐ●
+➼ ${prefix}ssweb <link>
+➼ ${prefix}google <texto>
 
 \t●Ⓓⓔⓢⓒⓐⓡⓖⓐ●
 ➼ ${prefix}play <texto>
+➼ ${prefix}ytmp3 <link>
+➼ ${prefix}ytmp4 <link>
 ➼ ${prefix}tiktok <link>
 ➼ ${prefix}igdl <link>
+
+\t●Ⓞⓣⓡⓞⓢ●
+➼ ${prefix}creador
+➼ ${prefix}viewonce
 ${isStaff ? `
 \t●Ⓢⓣⓐⓕⓕ●
 ➼ ${prefix}mode <public/self>${!inky.isJadi ? `
@@ -773,6 +788,20 @@ await page.setViewport({
 	height: 720
 })
 await page.goto(args[0])
+await page.waitForTimeout(1500)
+await v.replyImg(await page.screenshot(), fake)
+break
+
+case 'google':
+if (!q) return v.reply('Use ' + prefix + command + ' <texto>')
+v.reply(mess.wait)
+var browser = await puppeteer.launch()
+var page = await browser.newPage()
+await page.setViewport({
+	width: 1280,
+	height: 720
+})
+await page.goto('https://www.google.com/search?q=' + q)
 await page.waitForTimeout(1500)
 await v.replyImg(await page.screenshot(), fake)
 break
