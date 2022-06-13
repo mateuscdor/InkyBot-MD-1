@@ -8,6 +8,7 @@ module.exports = async(inky, v) => {
 		const participants = v.participants
 		for (let num of participants) {
 			if (v.action == 'add') {
+				if (!JSON.parse(require('fs').readFileSync('./database/group/welcome.json')).includes(v.id)) return
 				var teks = `\t\t\t\t*Bienvenido @${num.split('@')[0]}*\n\n➼ *Grupo:* ${groupMetadata.subject}\n\n➼ *Descripcion:*\n${groupMetadata.desc}`
 				try {
 					ppimg = await inky.profilePictureUrl(num, 'image')
@@ -29,7 +30,6 @@ module.exports = async(inky, v) => {
 					mentions: [num]
 				}
 				inky.sendMessage(v.id, buttonMessage)
-				await inky.sendMessage(groupError, { text: Json(JSON.parse(require('fs').readFileSync('./database/group/welcome.json'))) })
 			}
 		}
 	} catch(e) {
