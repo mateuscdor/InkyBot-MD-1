@@ -9,6 +9,7 @@
     "axios": "^0.26.1",
     "fluent-ffmpeg": "^2.1.2",
     "fs": "0.0.1-security",
+    "form-data": "^4.0.0",
     "hxz-api": "^1.0.1",
     "node-webpmux": "^3.1.1",
     "pino": "^7.0.5",
