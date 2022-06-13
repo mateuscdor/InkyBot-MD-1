@@ -595,7 +595,7 @@ var teks = `\t\t\t${botName} Shop
 
 ╭───── *✨ Vip ✨* ─────
 │ \t\t${isVip ? '*Ya tienes el rango ✨ Vip ✨*' : 'Usa *' + prefix + command + ' vip* para comprar el rango *✨ Vip ✨*'}
-│ ➼ *Precio:* _$750K_
+│ ➼ *Precio:* _$2.5M_
 │ ➼ *Ventajas:*
 │ \t\t- Acceso al comando *${prefix}join* gratis${!inky.isJadi ? `
 │ \t\t- Acceso al comando *${prefix}serbot*` : ''}
@@ -608,8 +608,8 @@ var teks = `\t\t\t${botName} Shop
 Para comprar un articulo use *${prefix + command} <articulo>*`
 if (q.toLowerCase().includes('vip')) {
 	if (isVip) return v.reply('Usted ya tiene el rango *✨ Vip ✨*')
-	if (userBal < 750000) return v.reply('No tienes suficiente dinero para comprar el rango *✨ Vip ✨*')
-	removeBal(senderNumber, 750000)
+	if (userBal < 2500000) return v.reply('No tienes suficiente dinero para comprar el rango *✨ Vip ✨*')
+	removeBal(senderNumber, 2500000)
 	vip.push(senderNumber)
 	fs.writeFileSync('./database/user/vip.json', Json(vip))
 	v.reply('@' + senderNumber + ' has comprado exitosamente el rango *✨ Vip ✨*, espero que lo disfrutes :D')
