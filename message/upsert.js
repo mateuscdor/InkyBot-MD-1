@@ -624,6 +624,19 @@ if (q.toLowerCase().includes('vip')) {
 }
 break
 
+case 'work':
+if (inky.isJadi) return v.react('❌')
+await v.react('✨')
+if (setWork.has(senderNumber)) return v.reply('Espere 30 minutos para volver a trabajar')
+var amount = getRandom('')
+addBal(senderNumber, Number(amount))
+v.reply('Has trabajado duro, tu recompenza es de *$' + amount + '*')
+if (isOwner) return
+setWork.add(senderNumber)
+await sleep((1000 * 60) * 30)
+setWork.delete(senderNumber)
+break
+
 /*
 	Juego
 */
@@ -650,19 +663,6 @@ var obj = {id: v.sender, from: v.chat, balance: args[0], pHand: [(drawRandomCard
 bj.push(obj)
 removeBal(senderNumber, Number(args[0]))
 inky.sendMessage(v.chat, { text: `*♣️ BlackJack ♠️*\n\n➫ Mano de @${senderNumber}: *${getHandValue(bj[position(bj, v.chat, v.sender)].pHand)}*\n\n🃏 Usa *Hit* o *Stand* 🃏`, footer: `Apuesta: *$${h2k(getHandValue(bj[position(bj, v.chat, v.sender)].balance).slice(1))}*\nBalance: *$${h2k(userBal-getHandValue(bj[position(bj, v.chat, v.sender)].balance))}*`, buttons: [{buttonId: 'bHit', buttonText: {displayText: 'Hit'}, type: 1}, {buttonId: 'bStand', buttonText: {displayText: 'Stand'}, type: 1}], headerType: 1, mentions: [v.sender] }, { quoted: v })
-break
-
-case 'work':
-if (inky.isJadi) return v.react('❌')
-await v.react('✨')
-if (setWork.has(senderNumber)) return v.reply('Espere 30 minutos para volver a trabajar')
-var amount = getRandom('')
-addBal(senderNumber, amount)
-v.reply('Has trabajado duro, tu recompenza es de *$' + amount + '*')
-if (isOwner) return
-setWork.add(senderNumber)
-await sleep((1000 * 60) * 30)
-setWork.delete(senderNumber)
 break
 
 case 'casino':
