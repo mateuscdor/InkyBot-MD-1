@@ -273,7 +273,8 @@ var teks = `\t\t╔═══❖•ೋ° °ೋ•❖═══╗
 
 \t●Ⓔⓒⓞⓝⓞⓜⓘⓐ●
 ➼ ${prefix}balance${!inky.isJadi ? `
-➼ ${prefix}transferir <monto> <@usuario>`: ''}
+➼ ${prefix}transferir <monto> <@usuario>
+➼ ${prefix}trabajar`: ''}
 ➼ ${prefix}top
 ➼ ${prefix}shop
 
@@ -625,6 +626,7 @@ if (q.toLowerCase().includes('vip')) {
 break
 
 case 'work':
+case 'trabajar':
 if (inky.isJadi) return v.react('❌')
 await v.react('✨')
 if (setWork.has(senderNumber)) return v.reply('Espere 30 minutos para volver a trabajar')
