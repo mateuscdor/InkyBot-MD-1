@@ -177,12 +177,12 @@ case 'profile':
 await v.react('✨')
 var teks = `\t\t\t\t\t*${botName} Profile*
 
-│ ➼ Usuario: ${v.pushName}
-│ ➼ Bio: ${bio}
-│ ➼ Wame: https://wa.me/${senderNumber}
+│ ➼ Usuario: *${v.pushName}*
+│ ➼ Bio: *${bio}*
+│ ➼ Wame: *https://wa.me/${senderNumber}*
 
-│ ➼ Balance: $${bal}
-│ ➼ Rango: ${rank}`
+│ ➼ Balance: *$${bal}*${isNaN(bal) ? ` (${userBal})` : ''}
+│ ➼ Rango: *${rank}*`
 try {
 	var image = await getBuffer(await inky.profilePictureUrl(v.sender, 'image'))
 } catch {
