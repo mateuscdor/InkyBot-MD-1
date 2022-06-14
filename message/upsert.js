@@ -205,7 +205,7 @@ if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if 
 await sleep(tm * m)
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward).participants
 if (p.length == '0') {
-	v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id)})
+	await v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id)})
 } else {
 	var none = Math.floor(Math.random() * p.length)
 	var user = p[none]
