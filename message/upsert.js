@@ -506,7 +506,7 @@ await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
 var code = await inky.groupInviteCode(v.chat)
-v.reply('\t\t\tLink del grupo *' + groupMetadata.subject + '*\n│ ➼ https://chat.whatsapp.com/' + code)
+v.reply('\t\t\tLink del grupo *' + groupMetadata.subject + '*\n│ ➼ https://chat.whatsapp.com/' + code, {quoted: quotedStatus})
 break
 
 case 'random':
@@ -514,7 +514,7 @@ await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
 var none = Math.floor(Math.random() * groupMembers.length + 0)
 var user = groupMembers[none].id
-v.reply('Ha sido elegido @' + user.split('@')[0], {mentions: [user]})
+v.reply('Ha sido elegido @' + user.split('@')[0], {mentions: [user], quoted: quotedStatus})
 break
 
 case 'hidetag':
@@ -523,7 +523,7 @@ if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
 var jids = []
 groupMembers.map(x => jids.push(x.id))
-v.reply(q, {mentions: jids})
+v.reply(q, {mentions: jids, quoted: quotedStatus})
 break
 
 case 'tagall':
@@ -536,7 +536,7 @@ var teks = `\t\t\t\t\t*${groupMetadata.subject}*\n\n➫ *Total de admins:* ${gro
 for (let x of jids) {
 	teks += `\n| ➼ @${x.split('@')[0]}`
 }
-v.reply(teks, {mentions: jids})
+v.reply(teks, {mentions: jids, quoted: quotedStatus})
 break
 
 /*
