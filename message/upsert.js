@@ -655,7 +655,7 @@ if (q < 50) return v.reply('Monto minimo debe de ser de 50$')
 if (q.includes('.')) return v.reply('No se puede jugar con numero decimales')
 if (q > 5000) return v.reply('Maximo para apostar es de *$5K*')
 if (userBal < q) return v.reply('No tienes suficiente dinero')
-var deck = ['5', '5', '5', '5', '10']
+var deck = ['10', '5', '5', '5', '5', '5']
 var ran = deck[Math.floor(Math.random() * deck.length)]
 var fail = ['🍊 : 🍒 : 🍐', '🍒 : 🔔 : 🍊', '🍊 : 🍋 : 🔔', '🔔 : 🍒 : 🍐', '🔔 : 🍒 : 🍊', '🍊 : 🍋 : 🔔', '🍐 : 🍒 : 🍋', '🍊 : 🍒 : 🍒', '🔔 : 🔔 : 🍇', '🍌 : 🍒 : 🔔', '🍐 : 🔔 : 🔔', '🍊 : 🍋 : 🍒', '🍋 : 🍋 : 🍌', '🔔 : 🔔 : 🍇', '🔔 : 🍐 : 🍇']
 var win = ['🍇 : 🍇 : 🍇', '🍐 : 🍐 : 🍐', '🔔 : 🔔 : 🔔', '🍒 : 🍒 : 🍒', '🍊 : 🍊 : 🍊', '🍌 : 🍌 : 🍌']
