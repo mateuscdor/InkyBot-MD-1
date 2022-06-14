@@ -173,7 +173,7 @@ break
 
 case 'giveaway':
 case 'sorteo':
-if (!isStaff) return v.react('❌')
+case 'sortear':
 await v.react('✨')
 if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
