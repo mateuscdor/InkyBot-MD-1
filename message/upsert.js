@@ -204,10 +204,13 @@ addGiveaways(giveaway, v.chat, senderNumber, reward)
 if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if (t == 'h') { var m = (1000 * 60) * 60 } else if (t == 'd') { var m = ((1000 * 60) * 60) * 24 }
 await sleep(tm * m)
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward).participants
-if (p.length == '0') return v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id)})
-var none = Math.floor(Math.random() * p.length)
-var user = p[none]
-await v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *"' + reward + '"*', {mentions: groupMembers.map(x => x.id)})
+if (p.length == '0') {
+	v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id)})
+} else {
+	var none = Math.floor(Math.random() * p.length)
+	var user = p[none]
+	await v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *' + reward + '*', {mentions: groupMembers.map(x => x.id)})
+}
 isGiveaway(giveaway, v.chat).giveaways.splice(isGiveaway(giveaway, v.chat).giveaways.indexOf(isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)), 1)
 if (isGiveaway(giveaway, v.chat).giveaways.length == '0') {
 	giveaway.splice(giveaway.indexOf(isGiveaway(giveaway, v.chat)), 1)
@@ -221,7 +224,7 @@ await v.react('✨')
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
 if (p.includes(senderNumber)) return v.reply('Usted ya esta participando en el sorteo')
 p.push(senderNumber)
-v.reply('Ya estas participando en el sorteo de @' + args[0] + ' por *"' + q.split(args[0] + ' ')[1] + '"*', {mentions: [v.sender, args[0] + '@s.whatsapp.net']})
+v.reply('Ya estas participando en el sorteo de @' + args[0] + ' por *' + q.split(args[0] + ' ')[1] + '*', {mentions: [v.sender, args[0] + '@s.whatsapp.net']})
 break
 
 /*
