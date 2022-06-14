@@ -172,60 +172,23 @@ break
 	Test
 */
 
-case 'giveaway':
-case 'sorteo':
-case 'sortear':
+case 'perfil':
+case 'profile':
 await v.react('✨')
-if (!v.isGroup) return v.reply(mess.only.group)
-if (!isGroupAdmins) return v.reply(mess.only.admins)
-var time = args[0]
-var reward = q.split(args[0] + ' ')[1]
-if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
-if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
-var t = time.slice(time.length - 1)
-var tm = time.split(t)[0]
-if (isNaN(tm)) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
-if (!isNaN(t) && ((t != 's') || (t != 'm') || (t != 'h') || (t != 'd'))) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
-if (isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)) return v.reply('Ya hay un sorteo con ese premio')
-var listMessage = {
-	text: `\t\t\t\t➫ *${botName} Giveaway*\n\n│ ➼ Hosteado por: *@${senderNumber}*\n│ ➼ Premio: *${reward}*\n│ ➼ Tiempo: *${time}*`,
-	buttonText: 'Abrir Aqui!',
-	sections: [
-		{
-			title: 'Sección',
-			rows: [
-				{title: 'Ingresar en el sorteo', rowId: '-giveawayadd ' + senderNumber + ' ' + reward}
-			]
-		}
-	],
-	mentions: groupMembers.map(x => x.id)
-}
-var msg = await inky.sendMessage(v.chat, listMessage, {quoted: quotedStatus})
-addGiveaways(giveaway, v.chat, senderNumber, reward)
-if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if (t == 'h') { var m = (1000 * 60) * 60 }
-await sleep(tm * m)
-var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward).participants
-if (p.length == '0') {
-	await v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id), quoted: quotedStatus})
-} else {
-	var none = Math.floor(Math.random() * p.length)
-	var user = p[none]
-	await v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *' + reward + '*', {mentions: groupMembers.map(x => x.id), quoted: quotedStatus})
-}
-isGiveaway(giveaway, v.chat).giveaways.splice(isGiveaway(giveaway, v.chat).giveaways.indexOf(isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)), 1)
-if (isGiveaway(giveaway, v.chat).giveaways.length == '0') {
-	giveaway.splice(giveaway.indexOf(isGiveaway(giveaway, v.chat)), 1)
-}
-await inky.sendMessage(v.chat, { delete: msg.key })
-break
+var teks = `\t\t\t\t\t*${botName} Profile*
 
-case 'giveawayadd':
-if (!isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1])) return v.react('❌')
-await v.react('✨')
-var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
-if (p.includes(senderNumber)) return v.reply('Usted ya esta participando en el sorteo')
-p.push(senderNumber)
-v.reply('Ya estas participando en el sorteo de @' + args[0] + ' por *' + q.split(args[0] + ' ')[1] + '*', {mentions: [v.sender, args[0] + '@s.whatsapp.net']})
+│ ➼ Usuario: ${v.pushName}
+│ ➼ Bio: ${bio}
+│ ➼ Wame: https://wa.me/${senderNumber}
+
+│ ➼ Balance: $${bal}
+│ ➼ Rango: ${rank}`
+try {
+	var image = await getBuffer(await inky.profilePictureUrl(v.sender, 'image'))
+} else {
+	var image = fs.readFileSync('./media/image/menu.jpg')
+}
+replyTempImg(teks, fake, [{urlButton: {displayText: 'Grupo de Soporte', url: groupSupport}}], image)
 break
 
 /*
@@ -303,6 +266,7 @@ var teks = `\t\t╔═══❖•ೋ° °ೋ•❖═══╗
 \t●Ⓞⓣⓡⓞⓢ●
 ➼ ${prefix}creador
 ➼ ${prefix}viewonce
+➼ ${prefix}perfil
 ${isStaff ? `
 \t●Ⓢⓣⓐⓕⓕ●
 ➼ ${prefix}mode <public/self>${!inky.isJadi ? `
@@ -515,6 +479,62 @@ if (!v.isGroup) return v.reply(mess.only.group)
 var none = Math.floor(Math.random() * groupMembers.length + 0)
 var user = groupMembers[none].id
 v.reply('Ha sido elegido @' + user.split('@')[0], {mentions: [user], quoted: quotedStatus})
+break
+
+case 'giveaway':
+case 'sorteo':
+case 'sortear':
+await v.react('✨')
+if (!v.isGroup) return v.reply(mess.only.group)
+if (!isGroupAdmins) return v.reply(mess.only.admins)
+var time = args[0]
+var reward = q.split(args[0] + ' ')[1]
+if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
+if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
+var t = time.slice(time.length - 1)
+var tm = time.split(t)[0]
+if (isNaN(tm)) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
+if (!isNaN(t) && ((t != 's') || (t != 'm') || (t != 'h') || (t != 'd'))) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
+if (isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)) return v.reply('Ya hay un sorteo con ese premio')
+var listMessage = {
+	text: `\t\t\t\t➫ *${botName} Giveaway*\n\n│ ➼ Hosteado por: *@${senderNumber}*\n│ ➼ Premio: *${reward}*\n│ ➼ Tiempo: *${time}*`,
+	buttonText: 'Abrir Aqui!',
+	sections: [
+		{
+			title: 'Sección',
+			rows: [
+				{title: 'Ingresar en el sorteo', rowId: '-giveawayadd ' + senderNumber + ' ' + reward}
+			]
+		}
+	],
+	mentions: groupMembers.map(x => x.id)
+}
+var msg = await inky.sendMessage(v.chat, listMessage, {quoted: quotedStatus})
+addGiveaways(giveaway, v.chat, senderNumber, reward)
+if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if (t == 'h') { var m = (1000 * 60) * 60 }
+await sleep(tm * m)
+var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward).participants
+if (p.length == '0') {
+	await v.reply('Nadie ha participado en el sorteo', {mentions: groupMembers.map(x => x.id), quoted: quotedStatus})
+} else {
+	var none = Math.floor(Math.random() * p.length)
+	var user = p[none]
+	await v.reply('Felicidades @' + user.split('@')[0] + ' ha ganado el sorteo de *' + reward + '*', {mentions: groupMembers.map(x => x.id), quoted: quotedStatus})
+}
+isGiveaway(giveaway, v.chat).giveaways.splice(isGiveaway(giveaway, v.chat).giveaways.indexOf(isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)), 1)
+if (isGiveaway(giveaway, v.chat).giveaways.length == '0') {
+	giveaway.splice(giveaway.indexOf(isGiveaway(giveaway, v.chat)), 1)
+}
+await inky.sendMessage(v.chat, { delete: msg.key })
+break
+
+case 'giveawayadd':
+if (!isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1])) return v.react('❌')
+await v.react('✨')
+var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
+if (p.includes(senderNumber)) return v.reply('Usted ya esta participando en el sorteo')
+p.push(senderNumber)
+v.reply('Ya estas participando en el sorteo de @' + args[0] + ' por *' + q.split(args[0] + ' ')[1] + '*', {mentions: [v.sender, args[0] + '@s.whatsapp.net']})
 break
 
 case 'hidetag':
