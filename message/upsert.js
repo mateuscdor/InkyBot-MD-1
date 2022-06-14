@@ -185,7 +185,7 @@ var teks = `\t\t\t\t\t*${botName} Profile*
 │ ➼ Rango: ${rank}`
 try {
 	var image = await getBuffer(await inky.profilePictureUrl(v.sender, 'image'))
-} else {
+} catch {
 	var image = fs.readFileSync('./media/image/menu.jpg')
 }
 replyTempImg(teks, fake, [{urlButton: {displayText: 'Grupo de Soporte', url: groupSupport}}], image)
