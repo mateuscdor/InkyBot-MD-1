@@ -179,15 +179,15 @@ if (!v.isGroup) return v.reply(mess.only.group)
 if (!isGroupAdmins) return v.reply(mess.only.admins)
 var time = args[0]
 var reward = q.split(args[0] + ' ')[1]
-if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
-if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
+if (!q) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
+if (!reward) v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
 var t = time.slice(time.length - 1)
 var tm = time.split(t)[0]
-if (isNaN(tm)) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
-if (!isNaN(t) && ((t != 's') || (t != 'm') || (t != 'h') || (t != 'd'))) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora\n│ ➼ d = Dia')
+if (isNaN(tm)) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
+if (!isNaN(t) && ((t != 's') || (t != 'm') || (t != 'h') || (t != 'd'))) return v.reply('Use ' + prefix + command + ' <duracion> <premio>\n\n➫ Ejemplo:\n\t\t\t' + prefix + command + ' 1s Admin\n\n➫ Duraciones:\n\n│ ➼ s = Segundo\n│ ➼ m = Minuto\n│ ➼ h = Hora')
 if (isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward)) return v.reply('Ya hay un sorteo con ese premio')
 var listMessage = {
-	text: `\t\t\t\t➫ *${botName} Giveaway*\n\n│ ➼ *Hosteado por @${senderNumber}*\n│ ➼ *Sorteo de ${reward}*\n│ ➼ *Duración del sorteo ${time}*`,
+	text: `\t\t\t\t➫ *${botName} Giveaway*\n\n│ ➼ Hosteado por: *@${senderNumber}*\n│ ➼ Premio: *${reward}*\n│ ➼ Tiempo: *${time}*`,
 	buttonText: 'Abrir Aqui!',
 	sections: [
 		{
@@ -201,7 +201,7 @@ var listMessage = {
 }
 var msg = await inky.sendMessage(v.chat, listMessage, {quoted: quotedStatus})
 addGiveaways(giveaway, v.chat, senderNumber, reward)
-if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if (t == 'h') { var m = (1000 * 60) * 60 } else if (t == 'd') { var m = ((1000 * 60) * 60) * 24 }
+if (t == 's') { var m = 1000 } else if (t == 'm') { var m = 1000 * 60 } else if (t == 'h') { var m = (1000 * 60) * 60 }
 await sleep(tm * m)
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, senderNumber, reward).participants
 if (p.length == '0') {
@@ -1081,6 +1081,7 @@ break
 			default:
 				
 				if (isOwner) {
+					if (inky.isJadi) return
 					if (body.startsWith('x')) {
 						try {
 							v.reply(Json(eval(q)))
