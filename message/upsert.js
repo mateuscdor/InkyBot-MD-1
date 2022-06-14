@@ -19,6 +19,7 @@ const yts = require('yt-search')
 
 const bj = new Array()
 const giveaway = new Array()
+const setCasino = new Set()
 
 const { imageToWebp, videoToWebp, webpToMp4, writeExif } = require('../lib/exif')
 const { fetchJson, getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('../lib/functions')
@@ -649,13 +650,14 @@ break
 
 case 'casino':
 await v.react('✨')
+if (setCasino.has(senderNumber)) return v.reply('Espere 10 segundos para jugar de nuevo')
 if (!q) return v.reply(`Ingrese un monto, ejemplo: ${prefix + command} <monto>`)
 if (isNaN(q)) return v.reply('El monto tiene que ser un numero')
 if (q < 50) return v.reply('Monto minimo debe de ser de 50$')
 if (q.includes('.')) return v.reply('No se puede jugar con numero decimales')
 if (q > 5000) return v.reply('Maximo para apostar es de *$5K*')
 if (userBal < q) return v.reply('No tienes suficiente dinero')
-var deck = ['10', '5', '5', '5', '5']
+var deck = ['10', '5', '5', '5', '5', '5']
 var ran = deck[Math.floor(Math.random() * deck.length)]
 var fail = ['🍊 : 🍒 : 🍐', '🍒 : 🔔 : 🍊', '🍊 : 🍋 : 🔔', '🔔 : 🍒 : 🍐', '🔔 : 🍒 : 🍊', '🍊 : 🍋 : 🔔', '🍐 : 🍒 : 🍋', '🍊 : 🍒 : 🍒', '🔔 : 🔔 : 🍇', '🍌 : 🍒 : 🔔', '🍐 : 🔔 : 🔔', '🍊 : 🍋 : 🍒', '🍋 : 🍋 : 🍌', '🔔 : 🔔 : 🍇', '🔔 : 🍐 : 🍇']
 var win = ['🍇 : 🍇 : 🍇', '🍐 : 🍐 : 🍐', '🔔 : 🔔 : 🔔', '🍒 : 🍒 : 🍒', '🍊 : 🍊 : 🍊', '🍌 : 🍌 : 🍌']
@@ -670,6 +672,9 @@ if (ran < 10) {
 	addBal(senderNumber, (Number(q) * 5))
 }
 v.reply(teks)
+setCasino.add(senderNumber)
+await sleep(5000)
+setCasino.delete(senderNumber)
 break
 
 /*
