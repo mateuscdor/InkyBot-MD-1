@@ -629,13 +629,13 @@ case 'work':
 case 'trabajar':
 if (inky.isJadi) return v.react('❌')
 await v.react('✨')
-if (setWork.has(senderNumber)) return v.reply('Espere 30 minutos para volver a trabajar')
+if (setWork.has(senderNumber)) return v.reply('Espere 2 horas para volver a trabajar')
 var amount = getRandom('')
 addBal(senderNumber, Number(amount))
 v.reply('Has trabajado duro, tu recompenza es de *$' + amount + '*')
 if (isOwner) return
 setWork.add(senderNumber)
-await sleep((1000 * 60) * 30)
+await sleep(((1000 * 60) * 60) * 2)
 setWork.delete(senderNumber)
 break
 
