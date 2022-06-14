@@ -57,7 +57,7 @@ module.exports = async(inky, v, store) => {
 		const q = args.join(' ')
 		const senderNumber = v.sender.split('@')[0]
 		const botNumber = inky.user.id.split(':')[0]
-		const userBal = checkBalReg(senderNumber) ? checkBal(senderNumber) : '0'
+		const userBal = checkBalReg(senderNumber) ? checkBal(senderNumber) : '5000'
 		try { var bio = (await inky.fetchStatus(v.sender)).status } catch { var bio = 'Sin Bio' }
 		const bal = h2k(userBal)
 		
