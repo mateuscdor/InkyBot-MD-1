@@ -544,11 +544,12 @@ await v.react('✨')
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
 var teks = `\t\t\t\t\t*Giveaway List*\n\n| ➼ Total de participantes: *${p.length}*\n`
 var jids = []
-for (let x of p) {
-	jids.push(x)
+p.map(x => jids.push(x))
+var teks = `\t\t\t\t\t*Giveaway List*\n\n| ➼ Total de participantes: *${p.length}*\n`
+for (let x of jids) {
 	teks += `\n| ➼ @${x}`
 }
-v.reply(teks, {mentions: p})
+v.reply(teks, {mentions: jids})
 break
 
 case 'hidetag':
