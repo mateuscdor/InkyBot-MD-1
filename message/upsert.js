@@ -23,7 +23,7 @@ const setCasino = new Set()
 const setWork = new Set()
 
 const { imageToWebp, videoToWebp, webpToMp4, writeExif } = require('../lib/exif')
-const { fetchJson, getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('../lib/functions')
+const { fetchJson, formatNumber, getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('../lib/functions')
 const { addFilter, addUser, addBal, checkBal, checkBalReg, isFiltered, removeBal } = require('../lib/money')
 const { sms } = require('../lib/simple')
 
@@ -58,9 +58,9 @@ module.exports = async(inky, v, store) => {
 		const q = args.join(' ')
 		const senderNumber = v.sender.split('@')[0]
 		const botNumber = inky.user.id.split(':')[0]
-		const userBal = checkBalReg(senderNumber) ? checkBal(senderNumber) : '5000'
+		const userBal = formatNumber(checkBalReg(senderNumber) ? checkBal(senderNumber) : '5000')
 		try { var bio = (await inky.fetchStatus(v.sender)).status } catch { var bio = 'Sin Bio' }
-		const bal = h2k(userBal)
+		const bal = h2k(checkBalReg(senderNumber) ? checkBal(senderNumber) : '5000')
 		
 		const groupMetadata = v.isGroup ? await inky.groupMetadata(v.chat) : {}
 		const groupMembers = v.isGroup ? groupMetadata.participants : []
