@@ -543,7 +543,9 @@ if (!isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0
 await v.react('✨')
 var p = isGiveaways(isGiveaway(giveaway, v.chat).giveaways, args[0], q.split(args[0] + ' ')[1]).participants
 var teks = `\t\t\t\t\t*Giveaway List*\n\n| ➼ Total de participantes: *${p.length}*\n`
+var jids = []
 for (let x of p) {
+	jids.push(x)
 	teks += `\n| ➼ @${x}`
 }
 v.reply(teks, {mentions: p})
